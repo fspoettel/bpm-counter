@@ -42,7 +42,8 @@ export default {
   components: { BpmForm, Navigation, Outputs },
   data () {
     return {
-      shouldPlayClick: true,
+      // @todo: investigate tap input delay on mobile
+      shouldPlayClick: false,
       resetInterval: 3,
       taps: []
     }
@@ -128,10 +129,17 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+  position: relative;
+}
+
 #main {
   display: flex;
   flex-flow: column nowrap;
-  height: 100vh;
+  height: 100%;
 }
 
 #header {

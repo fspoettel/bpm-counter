@@ -64,6 +64,7 @@ export default {
   flex: 0 0 auto;
   list-style: none;
   display: flex;
+  align-items: flex-end;
   margin: 0;
   padding: 0;
 }
