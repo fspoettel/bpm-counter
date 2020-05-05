@@ -3,9 +3,10 @@
     <div class="inputs">
       <div class="inputs-wrapper">
         <Button
-          @mousedown="onTap"
+          @mousedown="onMousedown"
+          @touchstart="onTouchstart"
+          @shortcut="handleTap"
           @click.prevent="noop"
-          @shortcut="onTap"
           name="bpm-in"
           shortcut="Space"
           size="l"
@@ -46,12 +47,22 @@ export default {
   },
   methods: {
     noop () {},
+    handleTap () {
+      if (this.shouldPlayClick) beep()
+      this.$emit('tap')
+    },
     onReset (evt) {
       this.$emit('reset')
     },
-    onTap (evt) {
-      if (this.shouldPlayClick) beep()
-      this.$emit('tap')
+    onMousedown (evt) {
+      if (!evt.defaultPrevented) {
+        this.handleTap()
+      }
+    },
+    onTouchstart (evt) {
+      evt.preventDefault()
+      evt.target.focus()
+      this.handleTap()
     }
   }
 }
